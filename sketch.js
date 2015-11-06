@@ -11,15 +11,24 @@ var brushPicker;
 var brushType;
 
 var pumpkin;
+var basketball;
+var nug;
+var Bape;
 
 
 
 function preload(){
     pumpkin = loadImage("images/pumpkin.png");
     imageMode(CENTER);
+    basketball = loadImage("images/basketball.png");
+    imageMode(CENTER);
+    nug = loadImage("images/nug.png");
+    imageMode(CENTER);
+    Bape = loadImage("images/Bape.png");
+    imageMode(CENTER);
 }
 
-
+  
 function setup() {
 
     //Make the canvas and then insert it into a div
@@ -38,12 +47,18 @@ function setup() {
     saveButton = select('.saveButton');
     saveButton.mouseClicked(saveFunction);
 
+    clearButton = select('.clearButton');
+    clearButton.mouseClicked(clearFunction);
+
     //set up the brush type
     brushPicker = createSelect();
     brushPicker.parent("brushType")
     brushPicker.option('paint brush');
     brushPicker.option('spray can');
     brushPicker.option('image');
+    brushPicker.option('image2');
+    brushPicker.option('image3');
+    brushPicker.option('image4');
     brushPicker.changed(changeBrush);
     brushType = brushPicker.value();
 }
@@ -57,6 +72,12 @@ function draw() {
             standardStroke(); 
         } else if(brushType == "image"){
             drawImage(); 
+        }else if(brushType == "image2"){
+            drawBasketball();
+        }else if(brushType == "image3"){
+            drawNug();
+        }else if(brushType == "image4"){
+            drawBape();
         }
         
     } else {
@@ -107,6 +128,18 @@ function drawImage(){
     image(pumpkin,mouseX,mouseY, slider.value(), slider.value());
 }
 
+
+function drawBasketball(){
+    image(basketball,mouseX,mouseY, slider.value(), slider.value());
+}
+
+function drawNug(){
+    image(nug,mouseX,mouseY, slider.value(), slider.value());
+}
+
+function drawBape(){
+    image(Bape,mouseX,mouseY, slider.value(), slider.value());
+}
 //--------------------------
 // Event Listeners
 //--------------------------
@@ -118,4 +151,8 @@ function changeBrush(){
 
 function saveFunction() {
     save(drawingCanvas, "myDrawing.jpg");
+}
+
+function clearFunction() {
+    clear(drawingCanvas);
 }
